@@ -1,0 +1,38 @@
+﻿<MudLayout>
+    <!-- AppBar -->
+    <MudAppBar Elevation="2" Color="Color.Primary">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" OnClick="@ToggleDrawer" />
+        <MudText Typo="Typo.h6" Class="ml-2">Weather Forecast</MudText>
+    </MudAppBar>
+
+    <!-- Drawer -->
+    <MudDrawer Open="@drawerOpen" Variant="DrawerVariant.Persistent">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h5" Class="text-white">Navigation</MudText>
+        </MudDrawerHeader>
+        <MudNav>
+            <!-- Home Link -->
+            <MudNavLink Href="/" Match="NavLinkMatch.All">
+                <MudIcon Icon="@Icons.Material.Filled.Home" /> Home
+            </MudNavLink>
+            <!-- Weather Link -->
+            <MudNavLink Href="/weather">
+                <MudIcon Icon="@Icons.Material.Filled.Cloud" /> Weather
+            </MudNavLink>
+
+            <!-- Spacer to push "Help" to the bottom -->
+            <MudSpacer />
+
+            <!-- Help Link -->
+            <MudNavLink Href="/help" Class="drawer-help">
+                <MudIcon Icon="@Icons.Material.Filled.Help" /> Help
+            </MudNavLink>
+        </MudNav>
+    </MudDrawer>
+</MudLayout>
+
+@code {
+    private bool drawerOpen = true;
+
+    private void ToggleDrawer() => drawerOpen = !drawerOpen;
+}

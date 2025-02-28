@@ -1,0 +1,122 @@
+﻿@inherits LayoutComponentBase
+@using BlazorApp.Models
+@using BlazorApp.Singletons
+@using BlazorApp.Services
+@using BlazorApp.Controllers
+@using static Supabase.Gotrue.Constants 
+
+@inject UserStateManager userState
+@inject NavigationManager NavigationManager
+@inject AuthService auth
+@* @inject SupabaseController supabase *@
+<MudThemeProvider Theme="_themeManager.Theme" />
+
+ <MudThemeProvider IsDarkMode="@isDarkMode"/> 
+<MudPopoverProvider />
+
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudThemeManagerButton OnClick="@((e) => OpenThemeManager(true))" />
+    <MudThemeManager Open="_themeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme" />
+        <MudAppBar Elevation="_themeManager.AppBarElevation">
+        <MudIconButton Icon="@Icons.Material.Filled.List" Color="Color.Inherit" OnClick="@(()=> ToggleDrawer())"></MudIconButton>
+       
+        <MudSpacer></MudSpacer>
+        <MudText Class="mx-2">@userRole</MudText>
+        @if(!userState.IsLoggedIn())
+        {
+            <MudButton  Variant="Variant.Text" Href="/signup">Signup</MudButton>
+            <MudButton Variant="Variant.Text" Href="/login">Login</MudButton>
+
+        }
+        else
+        {
+            <MudButton  Variant="Variant.Text" OnClick="@(() => Logout())">logout</MudButton>
+        }
+        @if(isDarkMode)
+        {
+            <MudIconButton Icon="@Icons.Material.Filled.LightMode" Color="Color.Inherit" OnClick="@ToggleDarkMode"></MudIconButton>
+        }
+        else
+        {
+            <MudIconButton Icon="@Icons.Material.Filled.DarkMode" Color="Color.Inherit" OnClick="@ToggleDarkMode"></MudIconButton>
+        }
+    </MudAppBar>
+
+    <MudDrawer Open="@isOpen" Variant="DrawerVariant.Persistent">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h5">weather forecast</MudText>
+        </MudDrawerHeader>
+        <NavMenu />
+        <MudDrawer @bind-Open="isOpen" ClipMode="_themeManager.DrawerClipMode" Elevation="_themeManager.DrawerElevation">
+            <MudDrawerHeader>
+                <MudText Typo="Typo.h5">Weather Forecast</MudText>
+            </MudDrawerHeader>
+            <NavMenu />
+        </MudDrawer>
+
+    </MudDrawer>
+
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-4">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+
+@code
+ {
+    private bool isOpen = true; // This binds to the @bind-Open directive
+    private bool isDarkMode = false;
+
+    private ThemeManagerTheme _themeManager = new ThemeManagerTheme();
+    public bool _themeManagerOpen = false;
+
+    private void ToggleDrawer() => isOpen = !isOpen;
+    private void ToggleDarkMode() => isDarkMode = !isDarkMode;
+
+    private string? userRole = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("State Change!!");
+
+        userState.OnChange += StateChange;
+
+        StateChange();
+    }
+
+    private void StateChange() => InvokeAsync(StateHasChanged);
+
+    public void Dispose() => userState.OnChange -= StateChange;
+
+    public async void Logout()
+    {
+        userState.SetUser(null);
+        NavigationManager.NavigateTo("/");
+        StateChange();
+    }
+
+    void OpenThemeManager(bool value)
+    {
+        _themeManagerOpen = value;
+    }
+
+    void UpdateTheme(ThemeManagerTheme value)
+    {
+        _themeManager = value;
+        StateHasChanged();
+    }
+
+    protected override void OnInitialized()
+    {
+        StateHasChanged();
+    }
+}
+
+}
+
+

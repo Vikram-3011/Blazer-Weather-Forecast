@@ -1,0 +1,108 @@
+/* Root Color Variables */
+:root {
+    --primary-color: #0d6efd; /* Blue for top bar */
+    --sidebar-color: #90e0ef; /* Light cyan */
+    --accent-color: #0077b6; /* Button color */
+    --content-bg: #f8f9fa; /* Light gray background */
+    --text-color: #333333;
+    --nav-link-hover: #00b4d8;
+}
+
+/* Main Layout Container */
+.main-layout {
+    display: flex;
+    height: 100vh;
+    background-color: var(--content-bg);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-color);
+    padding: 1rem;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+    .sidebar nav {
+        display: flex;
+        flex-direction: column;
+    }
+
+.nav-item {
+    margin: 1rem 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    padding: 0.75rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+    .nav-link:hover {
+        background-color: var(--nav-link-hover);
+        color: white;
+        transform: scale(1.05);
+    }
+
+.nav-icon {
+    margin-right: 0.75rem;
+    font-size: 1.2rem;
+}
+
+/* Top Bar */
+.top-bar {
+    width: 100%;
+    background-color: var(--primary-color);
+    padding: 0.75rem 1rem;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.top-bar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-title {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+/* Buttons */
+.auth-btn {
+    background-color: var(--accent-color);
+    color: white;
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+    .auth-btn:hover {
+        background-color: var(--primary-color);
+        transform: scale(1.05);
+    }
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--content-bg);
+}
+
+.content {
+    flex: 1;
+    margin: 1rem;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,27 @@
+﻿@page "/Help"
+@using MudBlazor
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+@using MudBlazor
+<MudContainer Class="height-100 d-flex flex-column justify-space-between">
+    <!-- Help Title -->
+    <MudText Typo="Typo.h4" Align="Align.Center">Help</MudText>
+
+    <!-- Help Content -->
+    <MudText Typo="Typo.h5" Align="Align.Center">
+        This content is for helping people who don't know the weather application.
+    </MudText>
+
+    <!-- Button -->
+    <MudContainer Class="d-flex justify-center align-end">
+        <MudButton Variant="Variant.Filled" Color="Color.Primary">Go to Home</MudButton>
+    </MudContainer>
+</MudContainer>
+@code {
+    void Navigatetohome()
+    {
+        NavigationManager.NavigateTo("/"); // navigation to the home page
+    }
+
+
+}

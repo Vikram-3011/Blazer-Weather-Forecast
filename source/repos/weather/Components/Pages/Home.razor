@@ -1,0 +1,47 @@
+﻿@page "/"
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+@using MudBlazor
+@using BlazorApp.Controllers
+@using BlazorApp.Singletons
+@using BlazorApp.Services
+@inject AuthService auth
+
+<PageTitle>Home</PageTitle>
+
+@* <MudText Typo="Typo.h3">Hello, @user!</MudText>
+<MudText Typo="Typo.body1">Welcome to your new app.</MudText>
+ *@
+<MudText Typo="Typo.h3"  Align="Align.Center" Style="color:black;" >Weather Forecast</MudText> <hr>
+<MudText Align="Align.Center" Style="color:gray" Typo="Typo.h5" >Welcome Page</MudText>
+@* <MudText Align="Align.Center" Color="Color.Default" Typo="Typo.h6" style="position:absolute;top:40%;left:52%"> "Every Day is Good Day" </MudText>
+ <MudButton Variant="Variant.Filled" DropShadow="false" Size="Size.Large" Color="Color.Primary" 
+           style="position: absolute; top: 50%; left: 52%; "
+           @onclick="NavigateToWeather"
+>Go to Weather</MudButton>  *@
+
+
+@code{
+    
+    // Method to navigate to another page
+    void NavigateToWeather()
+    {
+        NavigationManager.NavigateTo("/weather"); // navigation to the weather page 
+    }
+
+   
+
+    private string? user = "";
+
+    protected override void OnInitialized()
+    {
+        user = auth.GetSession()?.User?.Email;
+
+    }
+
+
+
+
+
+}
+
