@@ -1,1 +1,3 @@
-"# Weather-Forecast" 
+## Weather Forecast Blazor App 🌦️  
+
+The **Weather Forecast Blazor App** is a modern and interactive weather tracking application built with **Blazor** and **MudBlazor**. It provides real-time and forecasted weather information for global cities, integrating data from **OpenWeather API** and **WeatherAPI**. Users can save their favorite cities, receive **severe weather alerts** via in-app notifications and email (using ActiveCampaign), and customize weather alert thresholds. The app also features **historical alert tracking**, allowing users to review past weather alerts. Additionally, it supports **push notifications** for weather changes via **Firebase Cloud Messaging (FCM)**. The application is deployed using **Docker on Render** and uses **MongoDB** for storing user preferences, favorite cities, and weather alerts. 🚀
